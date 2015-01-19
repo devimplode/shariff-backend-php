@@ -14,10 +14,12 @@ class Backend
     protected $client;
     protected $domain;
     protected $services;
+    protected $serviceConfig;
 
     public function __construct($config)
     {
         $this->domain = $config["domain"];
+        $this->serviceConfig = (isset($config["serviceConfig"])) ? $config["serviceConfig"] : array();
         $this->client = new Client();
         $this->baseCacheKey = md5(json_encode($config));
 
@@ -48,8 +50,9 @@ class Backend
     {
         $services = array();
         foreach ($serviceNames as $serviceName) {
-            $serviceName = 'Heise\Shariff\Backend\\'.$serviceName;
-            $services[] = new $serviceName();
+            $className = 'Heise\Shariff\Backend\\'.$serviceName;
+            $config = (isset($this->serviceConfig[$serviceName])) ? $this->serviceConfig[$serviceName] : array();
+            $services[] = new $className($config);
         }
         return $services;
     }

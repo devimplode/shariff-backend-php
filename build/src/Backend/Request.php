@@ -8,9 +8,11 @@ abstract class Request
 {
 
     protected $client;
+    protected $config;
 
-    public function __construct()
+    public function __construct($config)
     {
+        $this->config = $config;
         $this->client = new Client();
     }
 

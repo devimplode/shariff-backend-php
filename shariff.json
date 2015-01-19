@@ -13,5 +13,11 @@
 		"Flattr",
 		"Pinterest",
 		"Xing"
-	]
+	],
+	"serviceConfig": {
+		"Facebook": {
+			"app_id": "your_app_id",
+			"secret": "super_secret_key"
+		}
+	}
 }
